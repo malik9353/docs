@@ -4,60 +4,39 @@ Back Up and Restore with MongoDB Tools
 
 .. default-domain:: mongodb
 
-.. role:: red(strong)
-   :class: text-danger
-
 .. contents:: On this page
    :local:
    :backlinks: none
    :depth: 1
    :class: singlecol
 
-This tutorial describes the process for creating backups and restoring data
-using the utilities provided with MongoDB. 
+MongoDB Atlas, the official MongoDB cloud service, provides 2 fully-managed
+methods for backups:
 
-.. topic:: MongoDB Atlass
+1. :atlas:`Continuous Backups </backup/continuous-backups>`, which take
+   incremental backups of data in your cluster, ensuring your backups are
+   typically just a few seconds behind the operational system. Atlas continuous
+   backups allow you to restore from stored snapshots or from a selected point
+   in time within the last 24 hours.  You can also query a continuous backup
+   snapshot.
 
-   MongoDB Atlas, the official MongoDB cloud service, provides 2 fully-managed
-   methods for backups:
-
-   1. :atlas:`Continuous Backups </backup/continuous-backups>`, which take
-      incremental backups of data in your cluster, ensuring your backups are
-      typically just a few seconds behind the operational system. Atlas continuous
-      backups allow you to restore from stored snapshots or from a selected point
-      in time within the last 24 hours.  You can also query a continuous backup
-      snapshot.
-
-   #. :atlas:`Cloud Provider Snapshots </backup/cloud-provider-snapshots>`, which
-      provide localized backup storage using the native snapshot functionality of
-      the cluster's cloud service provider.
-
-   .. note::
-
-      If you are not currently using MongoDB Atlas, you can learn how to migrate
-      your deployment into Atlas with minimal downtime. `Learn more
-      <https://www.mongodb.com/cloud/atlas/migrate?utm_source=backup-and-restore&utm_campaign=20-docs-in-20-days-migrations&utm_medium=docs>`_.
-
-
-Considerations
---------------
-
-Deployments
-~~~~~~~~~~~
-
-The :binary:`~bin.mongodump` and :binary:`~bin.mongorestore` utilities
-work with :doc:`BSON </reference/bson-types>` data dumps, and are
-useful for creating backups of small deployments. For resilient and
-non-disruptive backups, use a file system or block-level disk snapshot
-function, such as the methods described in the :doc:`/core/backups`
-document.
+#. :atlas:`Cloud Provider Snapshots </backup/cloud-provider-snapshots>`, which
+   provide localized backup storage using the native snapshot functionality of
+   the cluster's cloud service provider.
 
 .. note::
 
-   .. include:: /includes/extracts/sharded-clusters-backup-restore-mongodump-mongorestore-restriction.rst
+   If you are not currently using MongoDB Atlas, you can learn how to migrate
+   your deployment into Atlas with minimal downtime. `Learn more
+   <https://www.mongodb.com/cloud/atlas/migrate?utm_source=backup-and-restore&utm_campaign=20-docs-in-20-days-migrations&utm_medium=docs>`_.
 
-Performance Considerations
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+This tutorial describes the process for creating backups and restoring data
+using the utilities provided with MongoDB. The :binary:`~bin.mongodump`
+and :binary:`~bin.mongorestore` utilities work with
+:doc:`BSON </reference/bson-types>` data dumps, and are useful for creating
+backups of small deployments. For resilient and non-disruptive backups, use a
+file system or block-level disk snapshot function, such as the methods
+described in the :doc:`/core/backups` document.
 
 .. include:: /includes/extracts/tools-performance-considerations-dump-restore.rst
 
@@ -88,10 +67,6 @@ Procedures
 Back Up a Database with ``mongodump``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
-
-   .. include:: /includes/extracts/sharded-clusters-backup-restore-mongodump-mongorestore-restriction.rst
-
 Exclude ``local`` Database
 ``````````````````````````
 
@@ -106,7 +81,7 @@ Basic ``mongodump`` Operations
 ``````````````````````````````
 
 The :binary:`~bin.mongodump` utility backs up data by connecting to a
-running :binary:`~bin.mongod`.
+running :binary:`~bin.mongod` or :binary:`~bin.mongos` instance.
 
 The utility can create a backup for an entire server, database or collection,
 or can use a query to backup just part of a collection.
@@ -116,13 +91,15 @@ connects to the MongoDB instance on the local system
 (e.g. ``localhost``) on port ``27017`` and creates a
 database backup named ``dump/`` in the current directory.
 
-To backup data from a :binary:`~bin.mongod` instance
+To backup data from a :binary:`~bin.mongod` or :binary:`~bin.mongos` instance
 running on the same machine and on the default port of ``27017``,
 use the following command:
 
 .. code-block:: sh
 
    mongodump
+
+.. include:: /includes/warning-mongodump-compatibility-2.2.rst
 
 You can also specify the :option:`--host <mongodump --host>` and
 :option:`--port <mongodump --port>` of the MongoDB instance that the
@@ -195,10 +172,6 @@ and password credentials to specify database authentication.
 Restore a Database with ``mongorestore``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note::
-
-   .. include:: /includes/extracts/sharded-clusters-backup-restore-mongodump-mongorestore-restriction.rst
-
 Access Control
 ``````````````
 
@@ -212,7 +185,7 @@ The :binary:`~bin.mongorestore` utility restores a binary backup created by
 database backup in the :file:`dump/` directory.
 
 The :binary:`~bin.mongorestore` utility restores data by connecting to a
-running :binary:`~bin.mongod` directly.
+running :binary:`~bin.mongod` or :binary:`~bin.mongos` directly.
 
 :binary:`~bin.mongorestore` can restore either an entire database backup
 or a subset of the backup.
@@ -220,7 +193,7 @@ or a subset of the backup.
 .. include:: /includes/fact-uuid-restore-from-backup.rst
 
 To use :binary:`~bin.mongorestore` to connect to an active
-:binary:`~bin.mongod`, use a command with the following prototype form:
+:binary:`~bin.mongod` or :binary:`~bin.mongos`, use a command with the following prototype form:
 
 .. code-block:: sh
 

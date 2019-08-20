@@ -65,7 +65,6 @@ theme:
     - /text-search
     - /tutorial/manage-the-database-profiler
     - /core/index-text
-    - /reference/bson-types
     - /reference/configuration-options
     - /reference/indexes
     - /reference/method

@@ -40,15 +40,12 @@ security features include:
 
        :doc:`/tutorial/configure-ssl-clients`
 
-.. the blank column is required to keep everything lined up. 
-
 .. list-table::
    :header-rows: 1
    :class: index-table index-table-less-padding
 
    * - Enterprise Only
      - Encryption
-     - 
 
    * - :doc:`/core/kerberos`
 
@@ -59,8 +56,6 @@ security features include:
        :doc:`/core/auditing`
 
      - :doc:`/core/security-client-side-encryption`
-   
-     - 
 
 Security Checklist
 ------------------

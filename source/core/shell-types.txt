@@ -7,7 +7,7 @@ Data Types in the ``mongo`` Shell
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 1
    :class: singlecol
 
 MongoDB :term:`BSON` provides support for additional data types than

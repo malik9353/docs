@@ -135,7 +135,7 @@ Backups and Restores
 
 .. warning::
 
-   .. include:: /includes/extracts/sharded-clusters-backup-restore-mongodump-mongorestore-restriction.rst
+   .. include:: /includes/extracts/sharded-clusters-backup-restore-limitations-atomicity-general.rst
 
 Chunk Migrations
 ----------------

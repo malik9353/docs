@@ -1,26 +1,30 @@
 .. COMMENT to render hlist correctly, each column should have same number of items - otherwise it does a center horizontal align across columns
 
 .. hlist::
-   :columns: 3
-   
-   - `C 1.15.0 <http://mongoc.org/libmongoc/>`__
+   :columns: 4
 
-   - `C# 2.9.0 <https://mongodb.github.io/mongo-csharp-driver/>`__
+   - Java 3.11.0
 
-   - `Go 1.1 <https://godoc.org/go.mongodb.org/mongo-driver/mongo>`__
+   - Node 3.3.0
 
-   - `Java 3.11.0 <https://mongodb.github.io/mongo-java-driver/>`__
+   - Python 3.9.0
 
-   - `Node 3.3.0 <https://mongodb.github.io/node-mongodb-native/>`__
+   - C# 2.9.0
 
-   - `Perl 2.2.0 <https://metacpan.org/author/MONGODB>`__
+   - Go 1.1
 
-   - `Python 3.9.0 <https://api.mongodb.com/python/current/index.html>`__
+   - C 1.15.0
 
-   - `Ruby 2.10.0 <https://docs.mongodb.com/ruby-driver/current/>`__
+   - C++ 3.5.0
 
-   - `Scala 2.7.0 <https://mongodb.github.io/mongo-scala-driver/>`__
+   - Scala 2.7.0
 
+   - Ruby 2.10.0
 
+   - Perl 2.2.0
+
+   - PHPC 1.6.0
+
+   - PHPLIB 1.5.0
 
 

@@ -124,11 +124,6 @@ Visibility of Data That Can Be Rolled Back
 Rollback Considerations
 -----------------------
 
-User Operations
-~~~~~~~~~~~~~~~
-
-.. include:: /includes/extracts/4.2-changes-rollback-user-ops.rst
-
 Index Builds
 ~~~~~~~~~~~~
 
@@ -146,25 +141,20 @@ In previous versions, a :binary:`~bin.mongod` instance will not
 roll back more than 300 megabytes of data and requires manual
 intervention if more than 300 megabytes of data need to be rolled back.
 
-.. _rollback-time-limit:
+Time Elapsed Limitations
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Rollback Elapsed Time Limitations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. versionchanged:: 4.0
 
 Starting in version 4.0, the rollback time limit defaults to 24 hours
 and is configurable using the parameter
-:parameter:`rollbackTimeLimitSecs`:
+:parameter:`rollbackTimeLimitSecs`. :parameter:`rollbackTimeLimitSecs`
+allows the setting of the maximum time allowed from the common point to
+the last point in the oplog of the replica set member that is indicated
+for rollback.
 
-- In MongoDB 4.2+, the rollback time limit is calculated between the
-  first operation after the common point and the last point in the
-  oplog for the member to roll back.
-
-- In MongoDB 4.0, the rollback time limit is calculated between the
-  common point and the last point in the oplog for the member to roll
-  back.
-
-In MongoDB 3.6 and earlier, the rollback time limit is not configurable
-and is set to 30 minutes.
+In previous versions, the rollback time limit is not configurable and is
+set to 30 minutes.
 
 .. seealso:: :doc:`/core/replica-set-high-availability` and
    :doc:`/core/replica-set-elections`.

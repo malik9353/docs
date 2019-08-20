@@ -109,12 +109,13 @@ Kill related queries only
 
 .. include:: /includes/extracts/fact-method-dropIndexes-query-behavior.rst
 
-Resource Locking
-~~~~~~~~~~~~~~~~
+Locks
+~~~~~
 
-.. versionchanged:: 4.2
+.. warning::
 
-.. include:: /includes/extracts/dropIndexes-method-resource-lock.rst
+   The operation obtains a write lock on the affected database and will
+   block other operations until it has completed.
 
 Index Names
 ~~~~~~~~~~~

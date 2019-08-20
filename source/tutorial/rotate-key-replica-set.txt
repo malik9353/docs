@@ -21,23 +21,33 @@ a replica set without downtime. [#exclude-encryption-keyfile]_
 .. warning::
 
    The example keys in this tutorial are for illustrative purposes
-   only. Do :red:`NOT` use for your deployment. Instead, generate a
-   keyfile using any method you choose (for example, ``openssl rand -base64
+   only. Do :red:`NOT` use for your deployement. Instead, generate a
+   keyfile using any method you choose (e.g. ``openssl rand -base64
    756``, etc.).
 
 Consider a replica set where each member's keyfile contains the
 following key:
+   
+.. code-block:: none
+   :copyable: false
 
-.. figure:: /images/example-key1.png
-   :alt: Image of current key to replace.
-   :figwidth: 568px
+   Wre8zPa8KiC6HaQhxpHMktwMhpfeGDtjZKpUQHFQVF+qrKrX6a80Dc1nseigLEVQ
+   CSNYEG76zHxMsr9tCiRWcRme5vRSVivUSVXJsKB0pqGZXveh2dZWcitzODGe6yOF
+   xTUmKbg64unKT4LHY4MoEH8vHXJ7tokaLLDlohnJEEiz9zO0DHEdt0JpxDpyVHnp
+   70kJic1a7FFY0RsVoYMuqAcS+ggumr9rpYhixwVYLH47VzmSD+xTTB4q+QTtXkue
+   uOazSrg/QaY=
 
 The following procedure updates the replica set members to use a new
 key:
 
-.. figure:: /images/example-key2.png
-   :alt: Image of new key.
-   :figwidth: 568px
+.. code-block:: none
+   :copyable: false
+
+   afT65R2J01Qyxawxmjv+pTYtPGGJRbQ/WebXsSc9Z7MNEEbU8LaHn0skORKAKfIA
+   fgNAb4Ujpiyb9PwSOWW6OcSN0jUzqYL5FkzXORhTvoWdj9y4q2dMhgPva3oBW82G
+   6Fw5fp0orKNhYMFubYOGnHHduuNWAC/Wl3o79agNHf1dbf3KD4qf033pt45oPjXO
+   WGQLi9GLIoURFe3bXOo4wttk1Qxz4P6JIudN3m7dbOcA0kEzMBr4/G0Lv6k8o2gn
+   VTvy0pRdSHI=
 
 .. [#exclude-encryption-keyfile]
 
@@ -60,7 +70,7 @@ sequence of keys.
 .. warning::
 
    The example keys in this tutorial are for illustrative purposes
-   only. Do :red:`NOT` use for your deployment. Instead, generate a
+   only. Do :red:`NOT` use for your deployement. Instead, generate a
    keyfile using any method you choose (e.g. ``openssl rand -base64
    756``, etc.).
 
@@ -75,22 +85,45 @@ sequence of keys.
            content: |
 
               You can specify multiple key strings where each key
-              string is **enclosed in quotes**.
+              string is **enclosed in quotes**:
 
-              .. figure:: /images/example-multiple-keys1.png
-                 :alt: Image of multiple key strings.
-                 :figwidth: 600px
+              .. code-block:: yaml
+                 :copyable: false
+                    
+                 'Wre8zPa8KiC6HaQhxpHMktwMhpfeGDtjZKpUQHFQVF+qrKrX6a80Dc1nseigLEVQ
+                 CSNYEG76zHxMsr9tCiRWcRme5vRSVivUSVXJsKB0pqGZXveh2dZWcitzODGe6yOF
+                 xTUmKbg64unKT4LHY4MoEH8vHXJ7tokaLLDlohnJEEiz9zO0DHEdt0JpxDpyVHnp
+                 70kJic1a7FFY0RsVoYMuqAcS+ggumr9rpYhixwVYLH47VzmSD+xTTB4q+QTtXkue
+                 uOazSrg/QaY='
+
+                 'afT65R2J01Qyxawxmjv+pTYtPGGJRbQ/WebXsSc9Z7MNEEbU8LaHn0skORKAKfIA
+                 fgNAb4Ujpiyb9PwSOWW6OcSN0jUzqYL5FkzXORhTvoWdj9y4q2dMhgPva3oBW82G
+                 6Fw5fp0orKNhYMFubYOGnHHduuNWAC/Wl3o79agNHf1dbf3KD4qf033pt45oPjXO
+                 WGQLi9GLIoURFe3bXOo4wttk1Qxz4P6JIudN3m7dbOcA0kEzMBr4/G0Lv6k8o2gn
+                 VTvy0pRdSHI='
 
          - id: multiple-key-sequence
            name: Multiple Key Sequence
            content: |
 
               You can specify multiple key strings as a sequence of key
-              strings (optionally enclosed in quotes).
+              strings (optionally enclosed in quotes):
 
-              .. figure:: /images/example-multiple-keys2.png
-                 :alt: Image of multiple key string sequence.
-                 :figwidth: 600px
+              .. code-block:: yaml
+                 :copyable: false
+
+                 - 'Wre8zPa8KiC6HaQhxpHMktwMhpfeGDtjZKpUQHFQVF+qrKrX6a80Dc1nseigLEVQ
+                   CSNYEG76zHxMsr9tCiRWcRme5vRSVivUSVXJsKB0pqGZXveh2dZWcitzODGe6yOF
+                   xTUmKbg64unKT4LHY4MoEH8vHXJ7tokaLLDlohnJEEiz9zO0DHEdt0JpxDpyVHnp
+                   70kJic1a7FFY0RsVoYMuqAcS+ggumr9rpYhixwVYLH47VzmSD+xTTB4q+QTtXkue
+                   uOazSrg/QaY='
+
+                 - 'afT65R2J01Qyxawxmjv+pTYtPGGJRbQ/WebXsSc9Z7MNEEbU8LaHn0skORKAKfIA
+                   fgNAb4Ujpiyb9PwSOWW6OcSN0jUzqYL5FkzXORhTvoWdj9y4q2dMhgPva3oBW82G
+                   6Fw5fp0orKNhYMFubYOGnHHduuNWAC/Wl3o79agNHf1dbf3KD4qf033pt45oPjXO
+                   WGQLi9GLIoURFe3bXOo4wttk1Qxz4P6JIudN3m7dbOcA0kEzMBr4/G0Lv6k8o2gn
+                   VTvy0pRdSHI='
+
 
 2. Restart Each Member
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -139,7 +172,7 @@ sequence of keys.
 .. warning::
 
    The example keys in this tutorial are for illustrative purposes
-   only. Do :red:`NOT` use for your deployment. Instead, generate a
+   only. Do :red:`NOT` use for your deployement. Instead, generate a
    keyfile using any method you choose (e.g. ``openssl rand -base64
    756``, etc.).
 
@@ -147,10 +180,14 @@ sequence of keys.
 
    Modify each member's keyfile to include only the new password.
 
-   .. figure:: /images/example-key2.png
-      :alt: Image of new key.
-      :figwidth: 558px
+   .. code-block:: none
+      :copyable: false
 
+      'afT65R2J01Qyxawxmjv+pTYtPGGJRbQ/WebXsSc9Z7MNEEbU8LaHn0skORKAKfIA
+       fgNAb4Ujpiyb9PwSOWW6OcSN0jUzqYL5FkzXORhTvoWdj9y4q2dMhgPva3oBW82G
+       6Fw5fp0orKNhYMFubYOGnHHduuNWAC/Wl3o79agNHf1dbf3KD4qf033pt45oPjXO
+       WGQLi9GLIoURFe3bXOo4wttk1Qxz4P6JIudN3m7dbOcA0kEzMBr4/G0Lv6k8o2gn
+       VTvy0pRdSHI='
 
 4. Restart Each Member
 ~~~~~~~~~~~~~~~~~~~~~~

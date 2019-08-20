@@ -484,20 +484,6 @@ Authentication Parameters
    impact benign login attempts if the server is denying access to many
    other clients simultaneously.
 
-.. parameter:: allowRolesFromX509Certificates
-
-   *Default*: true
-
-   |both|
-
-   *Available starting in MongoDB 4.0.11 (and 3.6.14 and 3.4.22)*
-
-   A boolean flag that allows or disallows the retrieval of
-   authorization roles from client x.509 certificates.
-
-   You can only set :parameter:`allowRolesFromX509Certificates` during
-   startup in the config file or on the command line.
-
 General Parameters
 ~~~~~~~~~~~~~~~~~~
 
@@ -1590,31 +1576,22 @@ Replication Parameters
 
 .. parameter:: rollbackTimeLimitSecs
 
-   .. versionchanged:: 4.2
+   .. versionadded:: 4.0
 
    *Type*: 64-bit integer
 
    *Default*: 86400  (1 day)
 
-   Maximum age of data that can be rolled back. Negative values for
+   Maximum age of data that will be rolled back in the event of a
+   replication operations failure. If the time between the end of the
+   rolled back instance oplog and the common point (the last point where
+   the source node and the rolled back node had the same data) exceeds
+   this value, the rollback will fail. Note that negative values for
    this parameter are not valid.
 
-   Starting in MongoDB 4.2, if the time between the end of the
-   to-be-rolledback instance's oplog and the first operation after the
-   common point (the last point where the source node and the
-   to-be-rolledback node had the same data) exceeds this value, the
-   rollback will fail.
-   
-   In MongoDB 4.0, if the time between the end of the to-be-rolledback
-   instance's oplog and the common point (the last point where the
-   source node and the to-be-rolledback node had the same data) exceeds
-   this value, the rollback will fail.
-
-   To effectively have an unlimited rollback period, set the value to
+   To set an effectively unlimited rollback period, set the value to
    ``2147483647`` which is the maximum value allowed and equivalent to
    roughly 68 years.
-
-   .. versionadded:: 4.0
 
 .. parameter:: waitForSecondaryBeforeNoopWriteMS
 
@@ -1952,79 +1929,6 @@ Sharding Parameters
    .. code-block:: sh
 
       mongos --setParameter ShardingTaskExecutorPoolRefreshTimeoutMS=30000
-
-.. parameter:: ShardingTaskExecutorPoolReplicaSetMatching
-
-   .. versionadded:: 4.2
-
-   Type: string
-
-   Default: "matchPrimaryNode"
-
-   |mongos-only|
-   
-   The policy that determines the minimum size limit of the
-   :binary:`~bin.mongos` instance's connection pools to the sharded
-   cluster's replica set secondaries.
-
-   Available values are:
-   
-   .. list-table::
-      :header-rows: 1
-      :widths: 15 85
-      
-      * - Matching Policy
-        - Description
-
-      * - ``"matchPrimaryNode"`` (Default)
-      
-        - For each replica set in the sharded cluster (i.e. shard
-          replica set and config servers), the minimum size limit of
-          the :binary:`~bin.mongos` instance's connection pool to each
-          secondary of that replica set is equal to the size of its
-          connection pool to the primary.
-
-          In case of primary stepdown, ``matchPrimaryNode`` ensures
-          that any secondary that becomes the primary can handle the
-          current level of primary reads and writes.
-
-      * - ``"matchBusiestNode"``
-
-        - For each replica set in the sharded cluster (i.e. shard
-          replica set and config servers), the minimum size limit of
-          the :binary:`~bin.mongos` instance's connection pool to each
-          member of that replica set is equal to the largest among
-          the active connections counts to the primary and each
-          secondary members.
-
-          With ``"matchBusiestNode"``, :binary:`~bin.mongos` maintains
-          enough connections to each secondary to handle the current
-          level of primary and secondary reads and writes. The number
-          of connections to maintain in the pool decreases as the
-          number of active connections decreases.
-
-      * - ``"disabled"``
-
-        - For each replica set in the sharded cluster (i.e. shard
-          replica set and config servers), the minimum number of
-          connections in the :binary:`~bin.mongos` instance's
-          connection pool to each secondary is equal to the
-          :parameter:`ShardingTaskExecutorPoolMinSize`.
-
-   The following example sets the
-   :parameter:`ShardingTaskExecutorPoolReplicaSetMatching` to
-   ``"matchBusiestNode"`` during startup:
-
-   .. code-block:: sh
-
-      mongod --setParameter ShardingTaskExecutorPoolReplicaSetMatching="matchBusiestNode"
-
-   During runtime, you can also set the parameter with the
-   :dbcommand:`setParameter` command:
-
-   .. code-block:: javascript
-
-      db.adminCommand( { setParameter: 1,  ShardingTaskExecutorPoolReplicaSetMatching: "matchBusiestNode" } )
 
 .. parameter:: taskExecutorPoolSize
 

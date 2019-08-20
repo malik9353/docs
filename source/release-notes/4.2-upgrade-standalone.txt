@@ -13,6 +13,8 @@ Upgrade a Standalone to 4.2
    :depth: 1
    :class: singlecol
 
+.. include:: /includes/in-dev.rst
+
 The following steps outline the procedure to upgrade a standalone
 :binary:`~bin.mongod` from version |oldversion| to |newversion|. 
 
@@ -85,11 +87,7 @@ Upgrade Process
 Post Upgrade
 ------------
 
-``TLS`` Options Replace Deprecated ``SSL`` Options
-  .. include:: /includes/extracts/4.2-changes-options-tls-ssl-upgrade.rst
-
-4.2-Compatible Drivers Retry Writes by Default
-  .. include:: /includes/extracts/4.2-changes-drivers-retryWrites-default.rst
+.. include:: /includes/extracts/4.2-changes-options-tls-ssl-upgrade.rst
 
 
 Additional Upgrade Procedures

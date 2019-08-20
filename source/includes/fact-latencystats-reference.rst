@@ -26,11 +26,11 @@ following fields:
       - Description
 
     * - ``latency``
-      - A 64-bit integer giving the total combined
+      - A :bsontype:`long <data_numberlong>` giving the total combined
         latency in microseconds.
 
     * - ``ops``
-      - A 64-bit integer giving the total number of
+      - A :bsontype:`long <data_numberlong>` giving the total number of
         operations performed on the collection since startup.
 
     * - ``histogram``
@@ -51,7 +51,7 @@ following fields:
              - Description
 
            * - ``micros``
-             - A 64-bit integer giving the inclusive
+             - A :bsontype:`long <data_numberlong>` giving the inclusive
                upper time bound of the current latency range in
                microseconds.
 
@@ -60,7 +60,7 @@ following fields:
                ``micros`` value, inclusive.
 
            * - ``count``
-             - A 64-bit integer giving the number of
+             - A :bsontype:`long <data_numberlong>` giving the number of
                operations with latency less than or equal to ``micros``.
 
         For example, if ``collStats`` returns the following histogram:

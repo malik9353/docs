@@ -65,13 +65,6 @@ Behavior
 
 .. include:: /includes/extracts/views-behavior.rst
 
-Resource Locking
-~~~~~~~~~~~~~~~~
-
-.. versionchanged:: 4.2
-
-.. include:: /includes/extracts/createView-resource-lock.rst
-
 Access Control
 --------------
 
